@@ -1,35 +1,116 @@
-@import './base.css';
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --vt-c-cherry-red: #49060a;
+  --vt-c-light-cherry-red: #631f24;
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  --vt-c-light-gray: #F8f8f8;
+  --vt-c-gray: #dfdfdf;
+  --vt-c-dark-gray: #636363;
+
+  --vt-c-white: #ffffff;
+
+  --vt-c-black: #000000;
+
+
+}
+
+/* semantic color variables for this project */
+:root {
+  --color-background-general: var(--vt-c-light-gray);
+  --color-background-especific: var(--vt-c-white);
+
+  --color-title: var(--vt-c-cherry-red);
+  --color-subtitle: var(--vt-c-dark-gray);
+  --color-text: var(--vt-c-black);
+
+  --color-button-background: var(--vt-c-cherry-red);
+  --color-button-text: var(--vt-c-white);
+  --color-button-hover-background: var(--vt-c-light-cherry-red);
+  --color-button-hover-text: var( --vt-c-dark-gray);
+  --color-button-active-background: var(--vt-c-dark-gray);
+  --color-button-active-text: var( --vt-c-white);
+
+  --color-menu-background: var(--vt-c-light-gray);
+  --color-menu-text: var(--vt-c-black);
+  --color-menu-hover-background: var(--vt-c-gray);
+  --color-menu-hove-text: var(--vt-c-black);
+  --color-menu-active-background: var(--vt-c-light-gray);
+  --color-menu-active-text: var(--vt-c-cherry-red);
+
+  
+  --color-searchBar-background: var(--vt-c-white);
+  --color-searchBar-text: var(--vt-c-dark-gray);
+  --color-searchBar-border: var(--vt-c-black);
+  --color-searchBar-hover-background: var(--vt-c-light-gray);
+  --color-searchBar-hover-text: var(--vt-c-dark-gray);
+  --color-searchBar-hover-border: var(--vt-c-black);
+  --color-searchBar-click-background: var(--vt-c-cherry-red);
+  --color-searchBar-click-text: var(--vt-c-cherry-red);
+  --color-searchBar-click-border: var(--vt-c-cherry-red);
+  --color-searchBar-active-background: var(--vt-c-white);
+  --color-searchBar-active-text: var(--vt-c-black);
+  --color-searchBar-active-border: var(--vt-c-black);
+
+  --font-weight-title: 2.5rem;
+  --font-weight-subtitle: 1.75rem;
+  --font-weight-text: 1rem;
+  --font-weight-button: .9rem;
+  --font-weight-searchbar: .9rem;
+  --font-weight-sidebar: .9rem;
+
+}
+
+/*@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--vt-c-black);
+    --color-background-soft: var(--vt-c-black-soft);
+    --color-background-mute: var(--vt-c-black-mute);
+
+    --color-border: var(--vt-c-divider-dark-2);
+    --color-border-hover: var(--vt-c-divider-dark-1);
+
+    --color-heading: var(--vt-c-text-dark-1);
+    --color-text: var(--vt-c-text-dark-2);
+  }
+}*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   font-weight: normal;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+body {
+  min-height: 100vh;
+  background: var(--color-background-general);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+.fa-magnifying-glass:before,
+.fa-search:before {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
 }

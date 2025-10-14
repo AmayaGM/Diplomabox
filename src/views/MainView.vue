@@ -17,21 +17,15 @@ import Header from '@/components/Header.vue';
 </script>
 
 <style>
-* {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
 .container {
       display: flex;
       flex-direction: column; 
-      height: 100vh;
-      width: 100vw;
+      height: 100%;
+      width: 100%;
     }
 
 .header {
-      height: 7vh;
+      height: 8vh;
       width: 100%;
       display: flex;
       align-items: center;
@@ -45,15 +39,18 @@ import Header from '@/components/Header.vue';
     }
 
 .sidebar {
-      width: 250px;
+      width: 12vw;
       height: 100%;
       padding: 1rem;
     }
 
 .main {
       flex: 1;
-      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       height: 100%;
+      width: 100%;
       background-color: violet;
     }
 </style>

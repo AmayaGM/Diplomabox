@@ -1,3 +1,10 @@
-<template>Home</template>
-<script setup></script>
-<style scoped></style>
+<template>
+  Home
+</template>
+
+<script setup>
+</script>
+
+<style scoped>
+
+</style>

@@ -1,42 +1,66 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
+  --vt-c-cherry-red: #49060a;
+  --vt-c-light-cherry-red: #631f24;
+
+  --vt-c-light-gray: #F8f8f8;
+  --vt-c-gray: #dfdfdf;
+  --vt-c-dark-gray: #636363;
+
   --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
 
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
+  --vt-c-black: #000000;
 
-  --vt-c-indigo: #2c3e50;
 
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 }
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
+  --color-background-general: var(--vt-c-light-gray);
+  --color-background-especific: var(--vt-c-white);
 
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
+  --color-title: var(--vt-c-cherry-red);
+  --color-subtitle: var(--vt-c-dark-gray);
+  --color-text: var(--vt-c-black);
 
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
+  --color-button-background: var(--vt-c-cherry-red);
+  --color-button-text: var(--vt-c-white);
+  --color-button-hover-background: var(--vt-c-light-cherry-red);
+  --color-button-hover-text: var( --vt-c-dark-gray);
+  --color-button-active-background: var(--vt-c-dark-gray);
+  --color-button-active-text: var( --vt-c-white);
 
-  --section-gap: 160px;
+  --color-menu-background: var(--vt-c-light-gray);
+  --color-menu-text: var(--vt-c-black);
+  --color-menu-hover-background: var(--vt-c-gray);
+  --color-menu-hove-text: var(--vt-c-black);
+  --color-menu-active-background: var(--vt-c-light-gray);
+  --color-menu-active-text: var(--vt-c-cherry-red);
+
+  
+  --color-searchBar-background: var(--vt-c-white);
+  --color-searchBar-text: var(--vt-c-dark-gray);
+  --color-searchBar-border: var(--vt-c-black);
+  --color-searchBar-hover-background: var(--vt-c-light-gray);
+  --color-searchBar-hover-text: var(--vt-c-dark-gray);
+  --color-searchBar-hover-border: var(--vt-c-black);
+  --color-searchBar-click-background: var(--vt-c-cherry-red);
+  --color-searchBar-click-text: var(--vt-c-cherry-red);
+  --color-searchBar-click-border: var(--vt-c-cherry-red);
+  --color-searchBar-active-background: var(--vt-c-white);
+  --color-searchBar-active-text: var(--vt-c-black);
+  --color-searchBar-active-border: var(--vt-c-black);
+
+  --font-weight-title: 2.5rem;
+  --font-weight-subtitle: 1.75rem;
+  --font-weight-text: 1rem;
+  --font-weight-button: .9rem;
+  --font-weight-searchbar: .9rem;
+  --font-weight-sidebar: .9rem;
+
 }
 
-@media (prefers-color-scheme: dark) {
+/*@media (prefers-color-scheme: dark) {
   :root {
     --color-background: var(--vt-c-black);
     --color-background-soft: var(--vt-c-black-soft);
@@ -48,20 +72,20 @@
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-dark-2);
   }
-}
+}*/
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
   font-weight: normal;
 }
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
+  background: var(--color-background-general);
   transition:
     color 0.5s,
     background-color 0.5s;
