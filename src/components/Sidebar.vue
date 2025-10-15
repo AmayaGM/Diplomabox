@@ -1,6 +1,6 @@
 <template>
 <div class="sidebar">
-<h2> Barra lateral</h2>
+    <SubirArchivo></SubirArchivo>
 <ul>
     <li><RouterLink to="/Home">Inicio</RouterLink></li>
     <li><RouterLink to="/MisDocumentos">Mis documentos</RouterLink></li>
@@ -10,14 +10,15 @@
 </div>
 </template>
 
-<script></script>
+<script setup>
+import SubirArchivo from './modules/sidebar/SubirArchivo.vue';
+</script>
 
 <style>
 .sidebar{
     width: 100%;
     height: 100%;
     padding: 1rem;
-    background-color: aqua;
 }
 .sidebar ul {
     list-style: none;

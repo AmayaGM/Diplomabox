@@ -5,11 +5,14 @@
 
   --vt-c-light-gray: #F8f8f8;
   --vt-c-gray: #dfdfdf;
+  --vt-c-gray2: #ccc;
   --vt-c-dark-gray: #636363;
 
   --vt-c-white: #ffffff;
 
   --vt-c-black: #000000;
+
+
 
 
 }
@@ -40,23 +43,22 @@
   
   --color-searchBar-background: var(--vt-c-white);
   --color-searchBar-text: var(--vt-c-dark-gray);
-  --color-searchBar-border: var(--vt-c-black);
-  --color-searchBar-hover-background: var(--vt-c-light-gray);
-  --color-searchBar-hover-text: var(--vt-c-dark-gray);
+  --color-searchBar-border: var(--vt-c-gray2);
+  --color-searchBar-hover-background: var(--vt-c-cherry-red);
+  --color-searchBar-hover-text: var(--vt-c-black);
   --color-searchBar-hover-border: var(--vt-c-black);
-  --color-searchBar-click-background: var(--vt-c-cherry-red);
-  --color-searchBar-click-text: var(--vt-c-cherry-red);
-  --color-searchBar-click-border: var(--vt-c-cherry-red);
   --color-searchBar-active-background: var(--vt-c-white);
   --color-searchBar-active-text: var(--vt-c-black);
-  --color-searchBar-active-border: var(--vt-c-black);
+  --color-searchBar-active-border: var(--vt-c-cherry-red);
+  --color-searchBar-button-active-text: var(--vt-c-gray2);
+  --color-searchBar-button-active-background: var(--vt-c-cherry-red);
 
-  --font-weight-title: 2.5rem;
-  --font-weight-subtitle: 1.75rem;
-  --font-weight-text: 1rem;
-  --font-weight-button: .9rem;
-  --font-weight-searchbar: .9rem;
-  --font-weight-sidebar: .9rem;
+  --font-size-title: 2.5rem;
+  --font-size-subtitle: 1.75rem;
+  --font-size-text: 1rem;
+  --font-size-button: 1rem;
+  --font-size-searchbar: 1rem;
+  --font-size-sidebar: 1rem;
 
 }
 
@@ -113,4 +115,9 @@ body {
 .fa-search:before {
     font-family: "Font Awesome 6 Free" !important;
     font-weight: 900 !important;
+}
+
+.fa-file-circle-plus:before {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important; 
 }

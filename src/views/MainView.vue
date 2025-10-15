@@ -39,7 +39,7 @@ import Header from '@/components/Header.vue';
     }
 
 .sidebar {
-      width: 12vw;
+      width: auto;
       height: 100%;
       padding: 1rem;
     }
