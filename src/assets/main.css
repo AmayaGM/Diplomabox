@@ -34,11 +34,11 @@
   --color-button-active-text: var( --vt-c-white);
 
   --color-menu-background: var(--vt-c-light-gray);
-  --color-menu-text: var(--vt-c-black);
+  --color-menu-text: var(--vt-c-dark-gray);
   --color-menu-hover-background: var(--vt-c-gray);
   --color-menu-hove-text: var(--vt-c-black);
   --color-menu-active-background: var(--vt-c-light-gray);
-  --color-menu-active-text: var(--vt-c-cherry-red);
+  --color-menu-active-text: var(--vt-c-light-cherry-red);
 
   
   --color-searchBar-background: var(--vt-c-white);
@@ -59,6 +59,8 @@
   --font-size-button: 1rem;
   --font-size-searchbar: 1rem;
   --font-size-sidebar: 1rem;
+
+  --font-weight-sidebar: 2rem;
 
 }
 
@@ -118,6 +120,26 @@ body {
 }
 
 .fa-file-circle-plus:before {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important; 
+}
+
+.fa-house:before {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important; 
+}
+
+.fa-folder:before {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important; 
+}
+
+.fa-star:before {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important; 
+}
+
+.fa-trash:before {
     font-family: "Font Awesome 6 Free" !important;
     font-weight: 900 !important; 
 }
