@@ -15,11 +15,6 @@ const router = createRouter({
       component: () => import('../views/pages/home.vue'),
     },
     {
-      path: '/MisDocumentos',
-      name: 'MisDocumentos',
-      component: () => import('../views/pages/misDocumentos.vue'),
-    },
-    {
       path: '/Destacados',
       name: 'Destacados',
       component: () => import('../views/pages/destacados.vue'),

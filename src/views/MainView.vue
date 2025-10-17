@@ -25,7 +25,7 @@ import Header from '@/components/Header.vue';
     }
 
 .header {
-      height: 8vh;
+      height: 8%;
       width: 100%;
       display: flex;
       align-items: center;
@@ -39,18 +39,18 @@ import Header from '@/components/Header.vue';
     }
 
 .sidebar {
-      width: auto;
-      height: 100%;
+      width: 270px;
+      height: 92%;
       padding: 1rem;
     }
 
 .main {
       flex: 1;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       height: 100%;
-      width: 100%;
-      background-color: violet;
+      padding: 5%;
+      background-color: var( --vt-c-white);
     }
 </style>

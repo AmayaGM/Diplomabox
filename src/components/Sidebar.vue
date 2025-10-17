@@ -8,11 +8,6 @@
         </RouterLink>
     </li>
     <li class="menu-item">
-        <RouterLink to="/MisDocumentos">
-            <i class="fa-solid fa-folder"></i>   Mis documentos
-        </RouterLink>
-    </li>
-    <li class="menu-item">
         <RouterLink to="/Destacados">
             <i class="fa-solid fa-star"></i>   Destacados
         </RouterLink>
@@ -51,6 +46,7 @@ import SubirArchivo from './modules/sidebar/SubirArchivo.vue';
     color: var(--color-menu-text); /* Color normal */
     transition: background-color 0.3s, color 0.3s;
     cursor: pointer;
+    font-size: var(--font-size-sidebar)
 }
 
 /* Estilos para el enlace (RouterLink) dentro del LI */

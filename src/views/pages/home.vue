@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>Galería de Imágenes (Activas)</h1>
-    <hr>
+    <h1>Inicio</h1>
     <ImageGalleryTable :data="imagenesActivas" />
   </div>
 </template>
@@ -18,3 +17,11 @@ onMounted(() => {
   fetchImages();
 });
 </script>
+
+<style scoped>
+h1{
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-title);
+  color: var(--color-title);
+}
+</style>

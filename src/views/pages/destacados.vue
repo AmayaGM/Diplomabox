@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Imágenes Destacadas ⭐</h1>
+    <h1>Destacado</h1>
     <ImageGalleryTable :data="imagenesDestacadas" />
   </div>
 </template>
@@ -17,3 +17,11 @@ onMounted(() => {
     fetchImages();
 });
 </script>
+
+<style scoped>
+h1{
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-title);
+  color: var(--color-title);
+}
+</style>

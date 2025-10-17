@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Papelera de Reciclaje 🗑️</h1>
+    <h1>Papelera de reciclaje </h1>
     <ImageGalleryTable 
         :data="imagenesEnPapelera" 
         :isTrashView="true" 
@@ -20,3 +20,11 @@ onMounted(() => {
     fetchImages();
 });
 </script>
+
+<style scoped>
+h1{
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-title);
+  color: var(--color-title);
+}
+</style>
