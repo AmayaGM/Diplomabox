@@ -40,3 +40,8 @@
     font-family: "Font Awesome 6 Free" !important;
     font-weight: 900 !important;
 }
+
+.fa-xmark::before{
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+}

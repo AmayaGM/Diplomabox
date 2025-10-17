@@ -11,7 +11,14 @@
     </thead>
     <tbody>
       <tr v-for="imagen in data" :key="imagen.id">
-        <td><img :src="getPublicUrl(imagen.nombre_archivo_storage)" alt="Preview" style="max-height: 50px;"></td>
+        <td>
+          <img 
+            :src="getPublicUrl(imagen.nombre_archivo_storage, imagen.id)" 
+            :alt="imagen.nombre_archivo_usuario" 
+            style="max-height: 50px; cursor: pointer;"
+            @click="openImageModal(imagen)"
+          >
+        </td>
         <td>{{ imagen.nombre_archivo_usuario }}</td>
         <td>{{ imagen.nombre_quien_sube }}</td>
         <td>{{ new Date(imagen.fecha_actualizacion).toLocaleString() }}</td>
@@ -37,11 +44,18 @@
     </tbody>
   </table>
   <p v-if="data.length === 0">No hay imágenes para mostrar en esta sección.</p>
+
+  <ImageModal 
+    v-if="isModalOpen"
+    :image="selectedImage"
+    @close="closeImageModal"
+  />
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, ref } from 'vue'; // Importa ref
 import { useImageStore } from '@/stores/imageStore'; 
+import ImageModal from './ImageModal.vue'; // Importa el nuevo componente de modal
 
 const { getPublicUrl, toggleDestacado, moverAPapelera, restaurarDePapelera } = useImageStore();
 
@@ -51,15 +65,31 @@ const props = defineProps({
     type: Array,
     required: true
   },
-  isTrashView: { // Para saber si estamos en la vista de Papelera
+  isTrashView: { 
     type: Boolean,
     default: false
   },
-  showToggleDestacado: { // Para ocultar el botón en la papelera
+  showToggleDestacado: { 
     type: Boolean,
     default: true
   }
 });
+
+// Estado para el modal
+const isModalOpen = ref(false);
+const selectedImage = ref(null);
+
+// Función para abrir el modal
+const openImageModal = (image) => {
+  selectedImage.value = image;
+  isModalOpen.value = true;
+};
+
+// Función para cerrar el modal
+const closeImageModal = () => {
+  isModalOpen.value = false;
+  selectedImage.value = null; // Limpia la imagen seleccionada al cerrar
+};
 </script>
 
 <style scoped>
