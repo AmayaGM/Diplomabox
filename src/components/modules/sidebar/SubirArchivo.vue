@@ -1,11 +1,26 @@
 <template>
-  <button class="upload-button">
-    <i class="fa-solid fa-file-circle-plus button-icon"></i>
-    Subir archivo
-  </button>
+  <div>
+    <button class="upload-button" @click="showModal = true">
+      <i class="fa-solid fa-file-circle-plus button-icon"></i>
+      Subir Archivo
+    </button>
+
+    <UploadModal 
+      v-if="showModal" 
+      @close="showModal = false" 
+    />
+  </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import UploadModal from '@/components/modules/sidebar/UploadModal.vue'; // Importar el nuevo modal
+
+// Estado local para controlar la visibilidad del modal
+const showModal = ref(false);
+
+// Ya no necesitamos la mayoría del código JS original aquí.
+// La lógica de subirImagen, imagenFile, etc., se movió a UploadModal.vue.
 </script>
 
 <style scoped>
