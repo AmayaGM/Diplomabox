@@ -123,7 +123,63 @@ const restaurarDePapelera = async (id) => {
         return true;
     }
 };
+const eliminarPermanentemente = async (imagenId, storagePath) => {
+    if (!confirm('🚨 ¡ADVERTENCIA! Esta acción es PERMANENTE. ¿Estás seguro de que quieres ELIMINAR definitivamente esta imagen y su registro?')) return false;
 
+    try {
+        // 1. ELIMINAR DEL STORAGE (del bucket)
+        // El storagePath es la ruta relativa. remove espera un array de rutas.
+        const { error: storageError } = await supabase.storage
+            .from(bucketName)
+            .remove([storagePath]); 
+        if (storageError) {
+            // Manejar un caso común: si el archivo ya no existe en Storage, ignoramos el error 
+            // y procedemos a limpiar la BD. Si es otro error, lo registramos.
+            if (storageError.message === 'The resource was not found') {
+                 console.warn('El archivo no se encontró en Storage (posiblemente ya eliminado). Continuando con la limpieza de la BD.');
+            } else {
+                 // Si hay un error real al intentar borrar del Storage, lanzamos el error.
+                 // Si esto falla, el registro de la BD DEBE seguir existiendo para poder reintentar.
+                 console.error('Error al eliminar del Storage:', storageError.message);
+                 // No lanzaremos error aquí para asegurar que la BD se limpia, si es el caso.
+                 // Si la política de RLS es el problema, podría fallar aquí.
+            }
+        }
+        // Nota: Si el error es de Supabase RLS (Row Level Security) en Storage, 
+        // revisa las políticas del bucket.
+
+        // 2. ELIMINAR EL REGISTRO DE LA BASE DE DATOS
+        // En tu imageStore.js, dentro de eliminarPermanentemente:
+
+// Paso 2. ELIMINAR EL REGISTRO DE LA BASE DE DATOS
+const { error: dbError } = await supabase
+    .from('imagenes_publicas')
+    .delete()
+    .eq('id', imagenId);
+
+if (dbError) {
+    console.error('⚠️ ERROR DE BD (DELETE FAILED):', dbError.message);
+    throw new Error(`Error BD: ${dbError.message}`); // Lanza el error para verlo en el catch
+} else {
+    // Si la operación fue exitosa, dbData será un array vacío por el delete.
+    // Si falla, pero no arroja error, simplemente seguimos.
+    alert("¡Imagen eliminada permanentemente!");
+    console.log('✅ Base de Datos: Petición DELETE enviada (respuesta sin error).');
+}
+
+// ...
+        // 3. ACTUALIZAR EL ESTADO LOCAL
+        imagenes.value = imagenes.value.filter(img => img.id !== imagenId);
+        console.log(`Imagen con ID ${imagenId} eliminada permanentemente.`);
+        
+        return true; // Éxito
+    } catch (error) {
+        console.error('Eliminación permanente fallida:', error.message);
+        // Mostrar una alerta si falla la BD
+        alert(`Fallo la eliminación: ${error.message}. Revisa la consola para más detalles.`);
+        return false;
+    }
+};
 /**
  * Actualiza los metadatos de una imagen en la BD y, opcionalmente,
  * reemplaza el archivo en el storage.
@@ -228,6 +284,7 @@ export function useImageStore() {
         restaurarDePapelera,
         getPublicUrl, // Modificado para aceptar ID
         updateImage,
+        eliminarPermanentemente,
         imagenesActivas,
         imagenesDestacadas,
         imagenesEnPapelera,

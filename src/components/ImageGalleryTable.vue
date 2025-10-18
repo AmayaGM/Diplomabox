@@ -69,6 +69,9 @@
           <button v-else @click="restaurarDePapelera(imagen.id)">
             <i class="fa-solid fa-rotate-left"></i>
           </button>
+
+          <button v-if="isTrashView" @click="eliminarPermanentemente(imagen.id, imagen.nombre_archivo_storage)" class="btn-eliminar-permanente">
+            <i class="fa-solid fa-trash"></i> </button>
         </td>
       </tr>
     </tbody>
@@ -87,7 +90,7 @@ import { defineProps, ref } from 'vue'; // Importa ref
 import { useImageStore } from '@/stores/imageStore'; 
 import ImageModal from './ImageModal.vue'; // Importa el nuevo componente de modal
 
-const { getPublicUrl, toggleDestacado, moverAPapelera, restaurarDePapelera, applySort, currentSort } = useImageStore();
+const { getPublicUrl, toggleDestacado, moverAPapelera, restaurarDePapelera, applySort, currentSort, eliminarPermanentemente } = useImageStore();
 
 // --- Lógica del Menú de Ordenamiento ---
 const isSortMenuOpen = ref(false);
