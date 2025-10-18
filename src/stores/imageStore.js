@@ -5,6 +5,17 @@ import { supabase } from '@/supabase'; // Asegúrate de que esta ruta es correct
 const imagenes = ref([]); // Almacena todos los metadatos de la tabla
 const bucketName = 'imagenes_bucket';
 
+// NUEVO ESTADO PARA ALMACENAR EL TÉRMINO DE BÚSQUEDA
+const globalSearchTerm = ref('');
+
+/**
+ * Función para actualizar el término de búsqueda y recargar las imágenes.
+ * @param {string} term - El término de búsqueda.
+ */
+const setSearchTerm = async (term) => {
+    globalSearchTerm.value = term.trim(); // Eliminar espacios al inicio/fin
+    await fetchImages(); // Recargar imágenes con el nuevo filtro aplicado
+};
 // --- FUNCIONES DE GESTIÓN DE DATOS ---
 
 // Estado para el ordenamiento actual: campo y dirección
@@ -47,17 +58,31 @@ const applySort = (field, direction) => {
  */
 const fetchImages = async () => {
     try {
-        const { data, error } = await supabase
+        // 1. Iniciar la consulta
+        let query = supabase
             .from('imagenes_publicas')
-            .select('*')
-            .order('fecha_actualizacion', { ascending: false });
+            .select('*');
+
+        // 2. APLICAR FILTRO DE BÚSQUEDA
+        const term = globalSearchTerm.value;
+        if (term.length > 0) {
+            // Utilizamos .or() para buscar en múltiples columnas:
+            // 'nombre_archivo_usuario' o 'nombre_quien_sube'
+            // Usamos .ilike() para coincidencia parcial e insensible a mayúsculas
+            // El operador '%...%' busca coincidencias que contengan el término.
+            query = query.or(
+                `nombre_archivo_usuario.ilike.%${term}%,nombre_quien_sube.ilike.%${term}%`
+            );
+        }
+        
+        // 3. Aplicar ordenamiento
+        const { data, error } = await query
+            .order('fecha_actualizacion', { ascending: false }); // Opcional: ordenar inicialmente por fecha
 
         if (error) throw error;
         imagenes.value = data;
-
-        imagenes.value = data;
         
-        // Aplicar el ordenamiento actual si ya ha sido modificado
+        // 4. Aplicar el ordenamiento de Vue al array de resultados (para respetar la UI)
         applySort(currentSort.value.field, currentSort.value.direction);
     } catch (error) {
         console.error('Error al cargar las imágenes:', error.message);
@@ -290,5 +315,7 @@ export function useImageStore() {
         imagenesEnPapelera,
         currentSort, // Exportar para saber qué opción está activa
         applySort,
+        globalSearchTerm, // Para mantener el estado del input
+        setSearchTerm,
     };
 }
