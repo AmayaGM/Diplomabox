@@ -7,6 +7,41 @@ const bucketName = 'imagenes_bucket';
 
 // --- FUNCIONES DE GESTIÓN DE DATOS ---
 
+// Estado para el ordenamiento actual: campo y dirección
+const currentSort = ref({ 
+    field: 'fecha_actualizacion', // Por defecto: fecha_actualizacion
+    direction: 'desc'            // Por defecto: descendente (Más reciente)
+});
+
+// Función central de ordenamiento para mutar el array imagenes.value
+const applySort = (field, direction) => {
+    currentSort.value.field = field;
+    currentSort.value.direction = direction;
+    
+    // Función de comparación para el sort
+    imagenes.value.sort((a, b) => {
+        const aVal = a[field];
+        const bVal = b[field];
+
+        let comparison = 0;
+        
+        // Comparación alfabética (case-insensitive)
+        if (typeof aVal === 'string' && typeof bVal === 'string') {
+            comparison = aVal.localeCompare(bVal);
+        } else {
+            // Comparación de números o fechas
+            if (aVal > bVal) {
+                comparison = 1;
+            } else if (aVal < bVal) {
+                comparison = -1;
+            }
+        }
+
+        // Aplicar la dirección
+        return direction === 'asc' ? comparison : comparison * -1;
+    });
+};
+
 /**
  * Carga todas las imágenes (incluidas las eliminadas) desde la BD.
  */
@@ -19,6 +54,11 @@ const fetchImages = async () => {
 
         if (error) throw error;
         imagenes.value = data;
+
+        imagenes.value = data;
+        
+        // Aplicar el ordenamiento actual si ya ha sido modificado
+        applySort(currentSort.value.field, currentSort.value.direction);
     } catch (error) {
         console.error('Error al cargar las imágenes:', error.message);
     }
@@ -40,6 +80,7 @@ const toggleDestacado = async (imagen) => {
         // Actualizar el estado local
         imagen.destacado = nuevoDestacado;
         imagen.fecha_actualizacion = new Date().toISOString(); // Actualización clave para cache-busting
+        applySort(currentSort.value.field, currentSort.value.direction);
     }
 };
 
@@ -189,6 +230,8 @@ export function useImageStore() {
         updateImage,
         imagenesActivas,
         imagenesDestacadas,
-        imagenesEnPapelera
+        imagenesEnPapelera,
+        currentSort, // Exportar para saber qué opción está activa
+        applySort,
     };
 }

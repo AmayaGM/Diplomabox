@@ -1,4 +1,34 @@
 <template>
+
+  <div class="sort-container">
+    <div class="dropdown">
+      <button @click="toggleSortMenu" class="sort-button">
+        <i class="fa-solid fa-sort"></i>
+        Ordenar
+      </button>
+      
+      <div v-if="isSortMenuOpen" class="dropdown-menu">
+        <span class="dropdown-title">Alfabéticamente</span>
+        <a @click="setSort('nombre_archivo_usuario', 'asc')" :class="{ 'active-sort': currentSort.field === 'nombre_archivo_usuario' && currentSort.direction === 'asc' }">
+          A - Z
+        </a>
+        <a @click="setSort('nombre_archivo_usuario', 'desc')" :class="{ 'active-sort': currentSort.field === 'nombre_archivo_usuario' && currentSort.direction === 'desc' }">
+          Z - A
+        </a>
+        
+        <div class="dropdown-divider"></div>
+        
+        <span class="dropdown-title">Fecha de modificación</span>
+        <a @click="setSort('fecha_actualizacion', 'desc')" :class="{ 'active-sort': currentSort.field === 'fecha_actualizacion' && currentSort.direction === 'desc' }">
+          Más reciente
+        </a>
+        <a @click="setSort('fecha_actualizacion', 'asc')" :class="{ 'active-sort': currentSort.field === 'fecha_actualizacion' && currentSort.direction === 'asc' }">
+          Más antiguo
+        </a>
+      </div>
+    </div>
+  </div>
+
   <table>
     <thead>
       <tr>
@@ -57,7 +87,20 @@ import { defineProps, ref } from 'vue'; // Importa ref
 import { useImageStore } from '@/stores/imageStore'; 
 import ImageModal from './ImageModal.vue'; // Importa el nuevo componente de modal
 
-const { getPublicUrl, toggleDestacado, moverAPapelera, restaurarDePapelera } = useImageStore();
+const { getPublicUrl, toggleDestacado, moverAPapelera, restaurarDePapelera, applySort, currentSort } = useImageStore();
+
+// --- Lógica del Menú de Ordenamiento ---
+const isSortMenuOpen = ref(false);
+
+const toggleSortMenu = () => {
+  isSortMenuOpen.value = !isSortMenuOpen.value;
+};
+
+// Establece el ordenamiento y cierra el menú
+const setSort = (field, direction) => {
+  applySort(field, direction); // Llama a la acción del store
+  isSortMenuOpen.value = false;
+};
 
 // Definición de las propiedades que recibirá el componente
 const props = defineProps({
@@ -181,4 +224,86 @@ td img {
     gap: 5px;
   }
 }
+
+/* ... (Tus estilos existentes) ... */
+
+/* --- Estilos para Ordenamiento --- */
+
+.sort-container {
+  display: flex;
+  justify-content: flex-end; /* Alinea el botón a la derecha */
+  margin-bottom: 10px;
+  position: relative; /* Contenedor para el menú desplegable */
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.sort-button {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  border: 0px;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--font-size-button);
+  transition: background-color 0.2s;
+}
+
+.sort-button:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%; /* Se coloca debajo del botón */
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  z-index: 10;
+  padding: 10px 0;
+  border: 1px solid #ddd;
+}
+
+.dropdown-menu a {
+  color: var(--color-text);
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f7f7f7;
+}
+
+.dropdown-title {
+  display: block;
+  padding: 10px 15px 5px;
+  color: #6c757d; /* Gris claro para el título */ 
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.dropdown-divider {
+  height: 1px;
+  margin: 8px 0;
+  overflow: hidden;
+  background-color: #e9ecef;
+}
+
+.active-sort {
+  background-color: var(--vt-c-light-cherry-red) !important;
+  color: white !important;
+  font-weight: bold;
+}
+
 </style>

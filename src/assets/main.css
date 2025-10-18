@@ -41,7 +41,12 @@
     font-weight: 900 !important;
 }
 
-.fa-xmark::before{
+.fa-xmark:before{
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+}
+
+.fa-sort:before{
     font-family: "Font Awesome 6 Free" !important;
     font-weight: 900 !important;
 }
